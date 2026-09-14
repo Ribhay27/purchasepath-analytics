@@ -1,6 +1,6 @@
 # PurchasePath — GA4 E-commerce Product & Growth Analytics
 
-PurchasePath is an end-to-end Data Analyst portfolio project focused on understanding how users move through an e-commerce customer journey, from acquisition and product discovery to cart, checkout, purchase, and repeat behavior.
+PurchasePath is an end to end Data Analyst portfolio project focused on understanding how users move through an e-commerce customer journey, from acquisition and product discovery to cart, checkout, purchase, and repeat behavior.
 
 The project uses Google Analytics 4 event-level e-commerce data in BigQuery to identify where users drop off, which channels, products, devices, and customer segments perform differently, and where the largest opportunities exist to improve conversion, retention, and revenue.
 
