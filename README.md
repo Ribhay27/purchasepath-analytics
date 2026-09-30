@@ -1,34 +1,24 @@
 ## Overview
 
-PurchasePath is an end-to-end product analytics project using Google Analytics 4 e-commerce event data in BigQuery.
+PurchasePath analyzes Google Analytics 4 e-commerce data in BigQuery to understand how users move from browsing products to completing a purchase.
 
-The project models millions of raw behavioral events into user- and session-level purchase journeys to understand where conversion breaks down, which customer segments are driving those gaps, and where the business should prioritize improvement efforts.
+The main goal is to find where users are dropping out of the purchase journey, determine which customer segments are contributing most to those gaps, and estimate where improving conversion could have the biggest business impact.
 
-Rather than treating funnel, acquisition, retention, and product performance as separate analyses, the project is centered on one business decision:
+The project focuses on one main question:
 
-> **Which customer segment should the business prioritize to improve purchase conversion, and how large is the modeled opportunity?**
+> **Which customer segment should the business prioritize to improve purchase conversion, and how large is the potential opportunity?**
 
-## Analytical Approach
+## What I'll Analyze
 
-The analysis will:
-
-- Build a clean session-level model from raw GA4 event data
-- Construct a multi-step purchase funnel from product view through purchase
-- Identify the largest meaningful conversion drop-offs
-- Compare performance across device, acquisition, geography, and product segments
-- Test whether observed differences remain meaningful within comparable groups
-- Quantify uncertainty using statistical analysis in Python
-- Estimate modeled revenue opportunities under realistic conversion-lift scenarios
-- Design an A/B test around the strongest validated opportunity
-- Present the recommendation through Tableau and a stakeholder-facing summary
+- Build session-level data from raw GA4 events
+- Create a purchase funnel from product view to purchase
+- Measure where the largest drop-offs happen
+- Compare conversion across device, channel, geography, and product segments
+- Check whether the strongest differences are statistically meaningful
+- Estimate the potential revenue impact of improving conversion
+- Design an A/B test around the strongest finding
+- Present the results in Tableau
 
 ## Supporting Analysis
 
-Additional analysis may include:
-
-- Acquisition performance
-- Product and category performance
-- New vs. returning user behavior
-- Retention and repeat purchasing
-
-These analyses will support the central business question rather than operate as separate standalone studies.
+I’ll also look at acquisition, product performance, new vs. returning users, and repeat purchasing where they help explain the main conversion problem.
