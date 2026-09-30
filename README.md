@@ -1,41 +1,34 @@
-# PurchasePath — GA4 E-commerce Product & Growth Analytics
+## Overview
 
-PurchasePath is an end to end Data Analyst portfolio project focused on understanding how users move through an e-commerce customer journey, from acquisition and product discovery to cart, checkout, purchase, and repeat behavior.
+PurchasePath is an end-to-end product analytics project using Google Analytics 4 e-commerce event data in BigQuery.
 
-The project uses Google Analytics 4 event-level e-commerce data in BigQuery to identify where users drop off, which channels, products, devices, and customer segments perform differently, and where the largest opportunities exist to improve conversion, retention, and revenue.
+The project models millions of raw behavioral events into user- and session-level purchase journeys to understand where conversion breaks down, which customer segments are driving those gaps, and where the business should prioritize improvement efforts.
 
-## Business Problem
+Rather than treating funnel, acquisition, retention, and product performance as separate analyses, the project is centered on one business decision:
 
-An e-commerce business may generate large amounts of website traffic without clearly understanding which parts of the customer journey are performing well and where potential customers are being lost.
+> **Which customer segment should the business prioritize to improve purchase conversion, and how large is the modeled opportunity?**
 
-This project aims to answer:
+## Analytical Approach
 
-> **Where are users dropping out of the purchase journey, which segments are driving those patterns, and which areas should the business prioritize to improve growth and revenue?**
+The analysis will:
 
-## Key Analysis Areas
+- Build a clean session-level model from raw GA4 event data
+- Construct a multi-step purchase funnel from product view through purchase
+- Identify the largest meaningful conversion drop-offs
+- Compare performance across device, acquisition, geography, and product segments
+- Test whether observed differences remain meaningful within comparable groups
+- Quantify uncertainty using statistical analysis in Python
+- Estimate modeled revenue opportunities under realistic conversion-lift scenarios
+- Design an A/B test around the strongest validated opportunity
+- Present the recommendation through Tableau and a stakeholder-facing summary
 
-- Acquisition and traffic-source performance
-- Customer journey and multi-step funnel analysis
-- Cart and checkout abandonment
-- Conversion by device, channel, geography, and product
-- Product engagement and purchase performance
-- Cohort and retention analysis
+## Supporting Analysis
+
+Additional analysis may include:
+
+- Acquisition performance
+- Product and category performance
 - New vs. returning user behavior
-- Revenue and average order value
-- Behavioral segmentation
-- Growth opportunity sizing
-- Experiment recommendation based on analytical findings
+- Retention and repeat purchasing
 
-## Data
-
-The project uses Google's public GA4 e-commerce sample dataset hosted in BigQuery.
-
-The raw data is event-level and contains user actions such as:
-
-```text
-session_start
-page_view
-view_item
-add_to_cart
-begin_checkout
-purchase
+These analyses will support the central business question rather than operate as separate standalone studies.
