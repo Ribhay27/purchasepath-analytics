@@ -1,4 +1,7 @@
--- 1. Dataset size and coverage
+-- PurchasePath: initial GA4 data profiling
+
+
+-- Dataset size
 
 SELECT
     COUNT(*) AS total_events,
@@ -8,7 +11,7 @@ FROM
     `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`;
 
 
--- 2. Event distribution
+-- Event types and how many users triggered each one
 
 SELECT
     event_name,
@@ -21,9 +24,8 @@ GROUP BY
 ORDER BY
     event_count DESC;
 
--- ------------------------------------------------------------
--- 3. Inspect key funnel event fields
--- ------------------------------------------------------------
+
+-- Look at the main funnel events and the fields attached to them
 
 SELECT
     PARSE_DATE('%Y%m%d', event_date) AS event_date,
