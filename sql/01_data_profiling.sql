@@ -249,3 +249,25 @@ GROUP BY
 ORDER BY
     event_count DESC
 LIMIT 30;
+
+
+-- Inspect country values
+
+SELECT
+    geo.country AS country,
+    COUNT(*) AS event_count,
+    COUNT(DISTINCT user_pseudo_id) AS unique_users
+FROM
+    `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`
+WHERE
+    event_name IN (
+        'view_item',
+        'add_to_cart',
+        'begin_checkout',
+        'purchase'
+    )
+GROUP BY
+    geo.country
+ORDER BY
+    event_count DESC
+LIMIT 20;
