@@ -110,3 +110,34 @@ GROUP BY
     event_name
 ORDER BY
     total_events DESC;
+
+
+-- Check purchase and revenue fields
+
+SELECT
+    COUNT(*) AS purchase_events,
+    COUNT(DISTINCT user_pseudo_id) AS purchasers,
+
+    COUNTIF(
+        ecommerce.transaction_id IS NULL
+        OR ecommerce.transaction_id = ''
+    ) AS missing_transaction_id,
+
+    COUNT(DISTINCT ecommerce.transaction_id) AS unique_transaction_ids,
+
+    COUNTIF(
+        ecommerce.purchase_revenue IS NULL
+    ) AS missing_purchase_revenue,
+
+    COUNTIF(
+        ecommerce.purchase_revenue <= 0
+    ) AS non_positive_revenue,
+
+    ROUND(SUM(ecommerce.purchase_revenue), 2) AS total_revenue,
+    ROUND(AVG(ecommerce.purchase_revenue), 2) AS avg_purchase_revenue
+
+FROM
+    `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`
+
+WHERE
+    event_name = 'purchase';
