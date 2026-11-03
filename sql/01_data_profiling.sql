@@ -141,3 +141,66 @@ FROM
 
 WHERE
     event_name = 'purchase';
+
+
+-- Check whether transaction IDs appear on multiple purchase events
+
+WITH purchases AS (
+    SELECT
+        ecommerce.transaction_id AS transaction_id,
+        ecommerce.purchase_revenue AS purchase_revenue
+    FROM
+        `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`
+    WHERE
+        event_name = 'purchase'
+        AND ecommerce.transaction_id IS NOT NULL
+        AND ecommerce.transaction_id != ''
+)
+
+SELECT
+    transaction_id,
+    COUNT(*) AS purchase_event_count,
+    COUNTIF(purchase_revenue IS NULL) AS missing_revenue_events,
+    ROUND(MAX(purchase_revenue), 2) AS max_revenue
+FROM purchases
+GROUP BY transaction_id
+HAVING COUNT(*) > 1
+ORDER BY purchase_event_count DESC
+LIMIT 20;
+
+
+-- Check duplicate valid transaction IDs and revenue consistency
+
+WITH purchases AS (
+    SELECT
+        ecommerce.transaction_id AS transaction_id,
+        ecommerce.purchase_revenue AS purchase_revenue
+    FROM
+        `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`
+    WHERE
+        event_name = 'purchase'
+        AND ecommerce.transaction_id IS NOT NULL
+        AND ecommerce.transaction_id != ''
+        AND ecommerce.transaction_id != '(not set)'
+),
+
+transactions AS (
+    SELECT
+        transaction_id,
+        COUNT(*) AS event_count,
+        COUNT(DISTINCT purchase_revenue) AS revenue_value_count,
+        MIN(purchase_revenue) AS min_revenue,
+        MAX(purchase_revenue) AS max_revenue
+    FROM purchases
+    GROUP BY transaction_id
+)
+
+SELECT
+    COUNT(*) AS valid_transaction_ids,
+    SUM(event_count) AS purchase_events_with_valid_id,
+    COUNTIF(event_count > 1) AS duplicated_transaction_ids,
+    COUNTIF(
+        event_count > 1
+        AND revenue_value_count > 1
+    ) AS duplicates_with_different_revenue
+FROM transactions;
